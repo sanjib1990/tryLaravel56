@@ -1,5 +1,6 @@
 import Store from "../utils/Store";
 import Helper from "../utils/Helper";
+import AuthProvider from "../ServiceProviders/AuthServiceProvider";
 
 export default class Auth {
     /**
@@ -8,7 +9,7 @@ export default class Auth {
      * @returns {boolean}
      */
     static isloggedIn() {
-        return ! _.isEmpty(Store.get(Helper.getSessionKey()).auth)
+        return !_.isEmpty(Store.get(Helper.getSessionKey()).auth)
     }
 
     /**
@@ -26,17 +27,35 @@ export default class Auth {
      * @returns {{name: string}}
      */
     static afterAuthenticationRedirect() {
-        return { name: 'example' }
+        return {name: 'example'}
     }
 
     /**
      * Login the session.
      *
      * @param instance
-     * @param value
+     * @param params
+     * @param options
      */
-    static login (instance, value) {
-        instance.$session.set('auth', value);
+    static login(instance, params, options = {}) {
+        /**
+         * Options may have the following keys
+         * {
+         *  mode: JWT, ...
+         *  usePackage: true/false whether to use package or own implementation.
+         * }
+         */
+        const defaultObj = {mode: 'JWT', usePackage: false};
+        if (_.isEmpty(options)) options = defaultObj;
+
+        let tokenizer = AuthProvider.init(options).setMode(options.mode || defaultObj.mode).factory().login();
+
+        let obj = {
+            mode: options.mode || defaultObj.mode,
+            tokenizer: tokenizer.toObject()
+        };
+
+        instance.$session.set('auth', obj);
         instance.$router.push(Auth.afterAuthenticationRedirect());
     }
 

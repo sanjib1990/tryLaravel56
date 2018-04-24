@@ -1,3 +1,5 @@
+import Config from "./Config";
+
 export default class Helper {
     static empty(item) {
         return item === null || item === undefined || item.length === 0;
@@ -32,6 +34,6 @@ export default class Helper {
      * @returns {*}
      */
     static getSessionKey() {
-        return appConfig.sessionkey;
+        return Config.get('sessionkey', null);
     }
 }

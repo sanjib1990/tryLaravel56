@@ -57,7 +57,7 @@
         },
         methods: {
             submit() {
-                Auth.login(this, {email: this.email.value});
+                Auth.login(this, {email: this.email.value}, {mode: 'JWT', usePackage: false});
             }
         }
     }
