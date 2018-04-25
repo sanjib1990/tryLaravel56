@@ -2,7 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Tymon\JWTAuth\Http\Middleware\RefreshToken;
 
 class Kernel extends HttpKernel
 {
@@ -59,5 +61,9 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+        // All Custom middlewares
+        'jwt_auth' => JwtMiddleware::class,
+        'jwt_refresh' => RefreshToken::class
     ];
 }

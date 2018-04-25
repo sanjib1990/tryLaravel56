@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => env('AUTH_DEFAULT_GUARD', 'web'),
         'passwords' => 'users',
     ],
 
@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => env('GUADRS_API_DRIVER', 'token'),
             'provider' => 'users',
         ],
     ],
