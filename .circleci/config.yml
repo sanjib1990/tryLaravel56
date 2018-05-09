@@ -28,6 +28,7 @@ jobs:
 
       - run: composer global require hirak/prestissimo
       - run: php -v
+      - run: lsb_release -a
       - run: node -v
       - run: composer install -n --prefer-dist
       - run: npm install
