@@ -27,7 +27,7 @@ jobs:
           - v1-dependencies-
 
       - run: composer global require hirak/prestissimo
-      - run php -v
+      - run: php -v
       - run: composer install -n --prefer-dist
       - run: node -v
       - run: npm install
