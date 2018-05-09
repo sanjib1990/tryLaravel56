@@ -28,6 +28,7 @@ jobs:
 
       - run: composer global require hirak/prestissimo
       - run: php -v
+      - run: sudo apt-get install php7.2-gmp
       - run: lsb_release -a
       - run: node -v
       - run: composer install -n --prefer-dist
