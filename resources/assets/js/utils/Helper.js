@@ -13,9 +13,9 @@ export default class Helper {
      * @param defaultValue        The default value if the given key is not found.
      * @returns {any | null}
      */
-    static dataGet(item, keystring, defaultValue) {
+    static dataGet(item, keystring, defaultValue = null) {
         if (!item) {
-            return defaultValue || null;
+            return defaultValue;
         }
 
         const currentKey = keystring.substring(0, keystring.indexOf('.')) || keystring;
@@ -25,7 +25,7 @@ export default class Helper {
             return this.dataGet(item[currentKey], keystring, defaultValue);
         }
 
-        return item[currentKey] || defaultValue || null;
+        return item[currentKey] || defaultValue;
     }
 
     /**

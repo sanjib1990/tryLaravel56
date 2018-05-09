@@ -95,6 +95,6 @@ class JWTAuthenticator implements JwtAuthContract
      */
     public function invalidate()
     {
-        $this->auth->manager()->setBlacklistEnabled(true)->invalidate($this->auth->getToken());
+        $this->auth->invalidate(true);
     }
 }

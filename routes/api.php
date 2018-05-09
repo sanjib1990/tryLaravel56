@@ -16,7 +16,7 @@ Route::name('api.')->prefix('v1')->namespace('API\V1')->group(function () {
         return response()->jsend(['It Works'], trans('api.success'));
     })->name('index');
     Route::middleware('jwt_auth')->get('/protected', function () {
-        return response()->jsend(['hero protected'], trans('api.success'));
+        return response()->jsend(['a' => 'hero protected', 'enabled' => config('jwt.blacklist_enabled')], trans('api.success'));
     })->name('protected');
 
     /**

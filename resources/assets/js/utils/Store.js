@@ -18,7 +18,7 @@ export default class Store {
      * @param _default
      * @returns {*}
      */
-    static get(key, _default) {
+    static get(key, _default = null) {
         return PStore.get(key, _default);
     }
 
